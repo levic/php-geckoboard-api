@@ -1,5 +1,5 @@
 {
-    "name": "carlosio/geckoboard",
+    "name": "levic/geckoboard",
     "description": "A PHP library for dealing with Geckoboard API (http://www.geckoboard.com)",
     "license": "MIT",
     "authors": [
@@ -10,6 +10,10 @@
         {
             "name": "Raúl Fernández",
             "email": "arsakiyo@gmail.com"
+        },
+        {
+            "name": "Levi Cameron",
+            "email": "levi.cameron@alliancesoftware.com.au",
         }
     ],
     "require": {
