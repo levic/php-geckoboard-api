@@ -25,9 +25,13 @@ class NumberAndSecondaryStat extends Widget
      */
     private $mainPrefix = null;
     /**
-     * @var null Main value prefix
+     * @var null Set to 'reversed' to reverse 
      */
     private $type = null;
+	/**
+	 * @var null Text (only relevant for sparklines?) 
+	 */
+	private $text = null;
 
     /**
      * Set data main prefix (€, $, etc.)
@@ -78,7 +82,7 @@ class NumberAndSecondaryStat extends Widget
     /**
      * Set secondary value
      *
-     * @param int $secondaryValue
+     * @param int|array(int) $secondaryValue
      * @return $this
      */
     public function setSecondaryValue($secondaryValue)
@@ -116,7 +120,21 @@ class NumberAndSecondaryStat extends Widget
         return $this->type;
     }
 
+	/**
+	 * @param string|null $text
+	 */
+	public function setText($text)
+	{
+		$this->text = $text;
+	}
 
+	/**
+	 * @return string|null
+	 */
+	public function getText()
+	{
+		return $this->text;
+	}
 
     /**
      * {@inheritdoc}
@@ -124,10 +142,9 @@ class NumberAndSecondaryStat extends Widget
     public function getData()
     {
         $data = array(
-            'text' => '',
+            'text' => $this->getText(),
             'value' => (int) $this->getMainValue(),
         );
-
         $prefix = $this->getMainPrefix();
         if (null !== $prefix) {
             $data['prefix'] = (string) $prefix;
@@ -137,15 +154,20 @@ class NumberAndSecondaryStat extends Widget
             'item' => array($data),
             'type' => $this->getType(),
         );
-
         $secondaryValue = $this->getSecondaryValue();
         if (null !== $secondaryValue) {
-            $result['item'][] = array(
-                'text' => '',
-                'value' => (int) $secondaryValue
-            );
+			if (is_array($secondaryValue)) {
+				// sparkline
+				$result['item'][] = $secondaryValue;
+			} else {
+				// secondary text
+				$result['item'][] = array(
+					'text' => '',
+					'value' => (int) $secondaryValue
+				);
+			}
         }
-
+		
         return $result;
     }
 }
