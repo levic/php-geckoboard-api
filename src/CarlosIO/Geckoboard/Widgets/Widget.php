@@ -44,7 +44,7 @@ abstract class Widget
      */
     public function formatNumber($x)
     {
-		if ($x >= 0.1) $nDigits = 3;
+		$nDigits = 3;
 		if ($x >= 1) $nDigits = 2;
 		if ($x >= 10) $nDigits = 1;
         if ($x >= 100) $nDigits = 0;
