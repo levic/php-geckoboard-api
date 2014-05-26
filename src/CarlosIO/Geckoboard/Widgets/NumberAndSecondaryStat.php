@@ -143,7 +143,7 @@ class NumberAndSecondaryStat extends Widget
     {
         $data = array(
             'text' => $this->getText(),
-            'value' => (int) $this->getMainValue(),
+            'value' => $this->formatNumber($this->getMainValue()),
         );
         $prefix = $this->getMainPrefix();
         if (null !== $prefix) {
@@ -163,7 +163,7 @@ class NumberAndSecondaryStat extends Widget
 				// secondary text
 				$result['item'][] = array(
 					'text' => '',
-					'value' => (int) $secondaryValue
+					'value' => $this->formatNumber($secondaryValue),
 				);
 			}
         }
